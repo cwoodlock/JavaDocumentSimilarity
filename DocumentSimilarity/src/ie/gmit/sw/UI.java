@@ -16,7 +16,7 @@ public class UI {
 	
 	//Constructors
 	public UI() {
-		
+		super();
 	}
 	
 	//Methods
@@ -26,6 +26,14 @@ public class UI {
 		System.out.println("Main menu \nPlease enter 1 to compare Documents \nPlease enter 2 to exit");
 		choice = sc.nextInt();
 		
+		//Call method depending on user input
+		if(choice == 1) {
+			
+		} else if (choice == 2) {
+			
+		} else if(choice < 1 || choice > 2) {
+			
+		}
 		
 	}
 
