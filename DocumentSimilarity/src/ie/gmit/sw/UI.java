@@ -15,7 +15,7 @@ public class UI {
 	private Scanner sc = new Scanner(System.in);
 	private String file1,file2;
 	private int shingle;
-	private int blockingQueue;
+	private int threadPoolSize;
 	private int k;
 	
 	//Constructors
@@ -59,13 +59,13 @@ public class UI {
 		System.out.println("Please enter the size of the minHash: ");
 		k = sc.nextInt();
 		
-		//Prompt user for the size of the blocking queue
-		System.out.println("Please enter the size of the blocking queue: ");
-		blockingQueue = sc.nextInt();
+		//Prompt user for the size of the thread pool
+		System.out.println("Please enter the size of the thread pool: ");
+		threadPoolSize = sc.nextInt();
 		
 		//Create Launcher and call Launch
 		Launcher l = new Launcher();
-		l.Launch(file1, file2, shingle, k, blockingQueue);
+		l.Launch(file1, file2, shingle, k, threadPoolSize);
 		
 	}
 
