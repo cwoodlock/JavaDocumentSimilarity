@@ -58,7 +58,9 @@ public class UI {
 		System.out.println("Please enter the size of the blocking queue: ");
 		blockingQueue = sc.nextInt();
 		
+		//Create Launcher and call Launch
 		Launcher l = new Launcher();
+		l.Launch(file1, file2, shingle, blockingQueue);
 		
 	}
 
