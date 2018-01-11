@@ -19,6 +19,17 @@ public class Launcher {
 		Thread t1 = new Thread(new DocumentParser(file1, q, shingleSize, k), "T1");
 		Thread t2 = new Thread(new DocumentParser(file2, q, shingleSize, k), "T2");
 		
+		t1.start();
+		t2.start();
+		
+		try {
+			t1.join();
+			t2.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 		
 }
