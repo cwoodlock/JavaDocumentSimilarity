@@ -15,6 +15,7 @@ public class UI {
 	private Scanner sc = new Scanner(System.in);
 	private String file1,file2;
 	private int shingle;
+	private int blockingQueue;
 	
 	//Constructors
 	public UI() {
@@ -52,6 +53,12 @@ public class UI {
 		//Prompt user for the size of the shingle
 		System.out.println("Please enter the size of the shingle: ");
 		shingle = sc.nextInt();
+		
+		//Prompt user for the size of the blocking queue
+		System.out.println("Please enter the size of the blocking queue: ");
+		blockingQueue = sc.nextInt();
+		
+		
 	}
 
 }
