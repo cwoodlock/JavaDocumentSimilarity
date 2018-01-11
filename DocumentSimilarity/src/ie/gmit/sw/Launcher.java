@@ -17,8 +17,7 @@ public class Launcher {
 		
 		//Threads
 		Thread t1 = new Thread(new DocumentParser(file1, q, shingleSize, k), "T1");
-		Thread t2 = new Thread(new DocumentParser(file2, q, shingleSize, k) "T2");
-
+		Thread t2 = new Thread(new DocumentParser(file2, q, shingleSize, k), "T2");
 		
 	}
 		
