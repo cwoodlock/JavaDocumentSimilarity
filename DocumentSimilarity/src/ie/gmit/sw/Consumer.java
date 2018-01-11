@@ -1,5 +1,6 @@
 package ie.gmit.sw;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,53 @@ public class Consumer implements Runnable{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
+		int docCount = 2;
+		
+		while(docCount > 0) {
+			try {
+				
+				Shingle s = q.take();	//Blocking method
+				
+				if(s instanceof Poison) {
+					docCount--;
+					
+				} else {
+					
+					pool.execute(new Runnable() {
+
+						@Override
+						public void run() {
+							
+							for(int i = 0; i < minhashes.length; i++) {
+								int value = s.getHashcode()^minhashes[i];
+								List<Integer> list = map.get(s.getDocId());
+								
+								if(list == null) {
+									list = new ArrayList<Integer>(k);
+									
+									for(int j = 0; j < list.size(); j++) {
+										list.set(j, Integer.MAX_VALUE);
+									}
+									map.put(s.getDocId(), list);
+								} else {
+									
+									if(list.get(i) > value) {
+										list.set(i, value);
+									}
+									
+								}
+							}
+						}
+						
+					});
+					
+				}
+				
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 
