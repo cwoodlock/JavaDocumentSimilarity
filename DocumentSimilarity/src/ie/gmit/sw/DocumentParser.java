@@ -64,7 +64,8 @@ public class DocumentParser implements Runnable{
 		}
 		
 	}
-
+	
+	//Checks if you are at the last word in the file and if you are it injects poison to mark end of file
 	private void flushBuffer() {
 		
 		while(buffer.size() > 0) {
@@ -89,6 +90,7 @@ public class DocumentParser implements Runnable{
 		
 	}
 
+	//Used to put words into shingles of user defined size
 	private Shingle getNextShingle() {
 		
 		StringBuilder sb = new StringBuilder();
@@ -107,6 +109,7 @@ public class DocumentParser implements Runnable{
 		}
 	}
 
+	//Add words to the buffer so they can be put into shingles
 	private void addWordsToBuffer(String[] words) {
 		
 		for(String s: words) {

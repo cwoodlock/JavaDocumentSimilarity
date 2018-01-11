@@ -21,10 +21,12 @@ public class Launcher {
 		//Consumer thread
 		Thread t3 = new Thread(new Consumer(q, k, threadPoolSize));
 		
+		//Start Threads
 		t1.start();
 		t2.start();
 		t3.start();
 		
+		//Join Threads
 		try {
 			t1.join();
 			t2.join();

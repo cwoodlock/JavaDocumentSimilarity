@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /*
  * Colm Woodlock
@@ -24,6 +25,7 @@ public class Consumer implements Runnable{
 	private Map<Integer, List<Integer>> map = new HashMap<>();
 	private ExecutorService pool;
 	
+	//Customer object to run on T3
 	public Consumer(BlockingQueue<Shingle> q, int k, int poolSize) {
 		
 		this.q = q;
@@ -32,7 +34,7 @@ public class Consumer implements Runnable{
 		init();
 		
 	}
-
+	
 	private void init() {
 		
 		Random random = new Random();
@@ -93,6 +95,24 @@ public class Consumer implements Runnable{
 			}
 		}
 		
+		//Adapted from https://www.callicoder.com/java-executor-service-and-thread-pool-tutorial/
+		pool.shutdown();
+		try {
+            TimeUnit.SECONDS.sleep(2);
+        } catch (InterruptedException ex) {
+            throw new IllegalStateException(ex);
+        }
+		
+		List<Integer> intersection = new ArrayList();
+		intersection.retainAll(b);
+		
+		float jaccard = (float)intersection.size()/(k*2-(float)intersection.size());
+		
+		//Display result
+		System.out.println("File 1 and File 2 have a " + (jaccard) * 100 + "% similarity.");
+		/*
+		 *This does not work when trying to find the intersection of the  hash values stored on the map
+		 */
 	}
 
 }

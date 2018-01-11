@@ -11,6 +11,7 @@ public class Runner {
 		//Create an instance of the UI(user interface)
 		UI userInterface = new UI();
 		
+		//Start the progam
 		userInterface.mainMenu();
 	}
 	
