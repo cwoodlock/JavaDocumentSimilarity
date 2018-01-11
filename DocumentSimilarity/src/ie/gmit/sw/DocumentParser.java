@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Deque;
+import java.util.LinkedList;
 
 
 public class DocumentParser implements Runnable{
@@ -21,6 +23,7 @@ public class DocumentParser implements Runnable{
 	private BlockingQueue<Shingle>q;
 	private int shingleSize, k;
 	private BufferedReader br = null;
+	private Deque<String> buffer = new LinkedList<>();
 	
 	//Constructor
 	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int k) {
@@ -44,7 +47,7 @@ public class DocumentParser implements Runnable{
 		try {
 			while((line = br.readLine()) != null) {
 				String uLine = line.toUpperCase();
-				String [] words = uLine.split("\\\\s+"); //Adapted from https://stackoverflow.com/questions/225337/how-do-i-split-a-string-with-any-whitespace-chars-as-delimiters
+				String [] words = uLine.split("\\s+"); //Adapted from https://stackoverflow.com/questions/225337/how-do-i-split-a-string-with-any-whitespace-chars-as-delimiters
 				addWordsToBuffer(words);
 			}
 		} catch (IOException e) {
@@ -56,6 +59,9 @@ public class DocumentParser implements Runnable{
 
 	private void addWordsToBuffer(String[] words) {
 		
+		for(String s: words) {
+			buffer.add(s);
+		}
 		
 	}
 	
