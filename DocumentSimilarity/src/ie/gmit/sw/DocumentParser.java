@@ -77,8 +77,14 @@ public class DocumentParser implements Runnable{
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
+				
 			} else {
-				q.put(new Poison(docID, 0));
+				
+				try {
+					q.put(new Poison(docID, 0));
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		
