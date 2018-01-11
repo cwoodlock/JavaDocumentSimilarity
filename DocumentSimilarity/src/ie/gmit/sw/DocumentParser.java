@@ -58,7 +58,6 @@ public class DocumentParser implements Runnable{
 			flushBuffer();
 			
 		} catch (IOException e) {
-		
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

@@ -16,6 +16,7 @@ public class UI {
 	private String file1,file2;
 	private int shingle;
 	private int blockingQueue;
+	private int k;
 	
 	//Constructors
 	public UI() {
@@ -54,13 +55,17 @@ public class UI {
 		System.out.println("Please enter the size of the shingle: ");
 		shingle = sc.nextInt();
 		
+		//Prompt user for the size of the minhash
+		System.out.println("Please enter the size of the minHash: ");
+		k = sc.nextInt();
+		
 		//Prompt user for the size of the blocking queue
 		System.out.println("Please enter the size of the blocking queue: ");
 		blockingQueue = sc.nextInt();
 		
 		//Create Launcher and call Launch
 		Launcher l = new Launcher();
-		l.Launch(file1, file2, shingle, blockingQueue);
+		l.Launch(file1, file2, shingle, k, blockingQueue);
 		
 	}
 
