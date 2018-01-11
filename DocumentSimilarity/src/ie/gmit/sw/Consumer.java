@@ -3,8 +3,8 @@ package ie.gmit.sw;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -18,12 +18,13 @@ public class Consumer implements Runnable{
 	
 	//Variables
 	private BlockingQueue<Shingle> q;
-	private int k;	//minhashes
-	private int [] hashes;	//the random stuff
+	private int k;	
+	private int [] minhashes;	//the random stuff
 	private Map<Integer, List<Integer>> map = new HashMap<>();
 	private ExecutorService pool;
 	
 	public Consumer(BlockingQueue<Shingle> q, int k, int poolSize) {
+		
 		this.q = q;
 		this.k =k;
 		pool = Executors.newFixedThreadPool(poolSize);
@@ -33,6 +34,11 @@ public class Consumer implements Runnable{
 
 	private void init() {
 		
+		Random random = new Random();
+		minhashes = new int[k]; //200-300
+		for(int i =0; i < minhashes.length; i++) {
+			minhashes[i] = random.nextInt();
+		}
 		
 	}
 
