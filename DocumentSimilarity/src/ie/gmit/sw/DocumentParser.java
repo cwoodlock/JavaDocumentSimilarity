@@ -21,16 +21,16 @@ public class DocumentParser implements Runnable{
 	//Variables
 	private String file;
 	private BlockingQueue<Shingle>q;
-	private int shingleSize, k;
+	private int shingleSize, docID;
 	private BufferedReader br = null;
 	private Deque<String> buffer = new LinkedList<>();
 	
 	//Constructor
-	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int k) {
+	public DocumentParser(String file, BlockingQueue<Shingle> q, int shingleSize, int docID) {
 		this.q = q;
 		this.file = file;
 		this.shingleSize = shingleSize;
-		this.k = k;
+		this.docID = docID;
 	}
 
 	@Override
@@ -46,15 +46,40 @@ public class DocumentParser implements Runnable{
 		
 		try {
 			while((line = br.readLine()) != null) {
+				
 				String uLine = line.toUpperCase();
 				String [] words = uLine.split("\\s+"); //Adapted from https://stackoverflow.com/questions/225337/how-do-i-split-a-string-with-any-whitespace-chars-as-delimiters
 				addWordsToBuffer(words);
+				
+				Shingle s = getNextShingle();
+				q.put(s);
 			}
+			
 		} catch (IOException e) {
 		
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 		
+	}
+
+	private Shingle getNextShingle() {
+		
+		StringBuilder sb = new StringBuilder();
+		int counter = 0;
+		
+		while(counter < shingleSize) {
+			if(buffer.peek() != null) {
+				sb.append(buffer.poll());
+			}
+			counter++;
+		}
+		if(sb.length() < 0) {
+			return null;
+		} else {
+			return (new Shingle(docID, sb.toString().hashCode()));
+		}
 	}
 
 	private void addWordsToBuffer(String[] words) {
