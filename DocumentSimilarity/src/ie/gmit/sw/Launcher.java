@@ -19,14 +19,16 @@ public class Launcher {
 		Thread t1 = new Thread(new DocumentParser(file1, q, shingleSize, 1), "T1");
 		Thread t2 = new Thread(new DocumentParser(file2, q, shingleSize, 2), "T2");
 		//Consumer thread
-		Thread t3 = new Thread(new Consumer(q, k, threadPoolSize))
+		Thread t3 = new Thread(new Consumer(q, k, threadPoolSize));
 		
 		t1.start();
 		t2.start();
+		t3.start();
 		
 		try {
 			t1.join();
 			t2.join();
+			t3.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
