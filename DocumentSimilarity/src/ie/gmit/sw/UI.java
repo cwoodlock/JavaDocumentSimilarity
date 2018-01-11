@@ -35,9 +35,10 @@ public class UI {
 			compareDocuments();
 			
 		} else if (choice == 2) {
-			
+			return;
 		} else if(choice < 1 || choice > 2) {
-			
+			System.out.println("Please enter 1 or 2");
+			choice = sc.nextInt();
 		}
 		
 	}
