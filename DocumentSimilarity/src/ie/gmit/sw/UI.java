@@ -58,6 +58,7 @@ public class UI {
 		System.out.println("Please enter the size of the blocking queue: ");
 		blockingQueue = sc.nextInt();
 		
+		Launcher l = new Launcher();
 		
 	}
 
