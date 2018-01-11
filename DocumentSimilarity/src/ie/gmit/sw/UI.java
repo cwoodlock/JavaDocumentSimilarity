@@ -13,6 +13,8 @@ public class UI {
 	//variables
 	private int choice = 0;
 	private Scanner sc = new Scanner(System.in);
+	private String file1,file2;
+	private int shingle;
 	
 	//Constructors
 	public UI() {
@@ -28,6 +30,7 @@ public class UI {
 		
 		//Call method depending on user input
 		if(choice == 1) {
+			compareDocuments();
 			
 		} else if (choice == 2) {
 			
@@ -35,6 +38,20 @@ public class UI {
 			
 		}
 		
+	}
+	
+	public void compareDocuments() {
+		
+		//Prompt user to enter file names
+		System.out.println("Please enter the name of the first file: ");
+		file1 = sc.next();
+		
+		System.out.println("Please enter the name of the second file: ");
+		file2 = sc.next();
+		
+		//Prompt user for the size of the shingle
+		System.out.println("Please enter the size of the shingle: ");
+		shingle = sc.nextInt();
 	}
 
 }
