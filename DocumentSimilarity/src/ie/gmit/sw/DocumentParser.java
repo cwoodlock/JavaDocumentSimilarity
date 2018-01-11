@@ -55,11 +55,31 @@ public class DocumentParser implements Runnable{
 				q.put(s);
 			}
 			
+			flushBuffer();
+			
 		} catch (IOException e) {
 		
 			e.printStackTrace();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+		
+	}
+
+	private void flushBuffer() {
+		
+		while(buffer.size() > 0) {
+			Shingle s = getNextShingle();
+			
+			if(s != null) {
+				try {
+					q.put(s);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			} else {
+				q.put(new Poison(docID, 0));
+			}
 		}
 		
 	}
